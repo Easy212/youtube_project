@@ -2,9 +2,6 @@
 /build
 
 dev.js
-
-
-
 .DS_Store
 
 npm-debug.log*
