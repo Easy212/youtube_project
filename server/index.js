@@ -14,10 +14,10 @@ const config = require("./config/key");
 //   .then(() => console.log("DB connected"))
 //   .catch(err => console.error(err));
 
-const mongoose = require("mongoose");
-const connect = mongoose.connect(config.mongoURI,
+const mongoose = require("mongoose"); //몽고DB연결
+const connect = mongoose.connect(config.mongoURI, //몽고DB연결
   {
-    useNewUrlParser: true, useUnifiedTopology: true,
+    useNewUrlParser: true, useUnifiedTopology: true, //에러가 뜬다는데
     useCreateIndex: true, useFindAndModify: false
   })
   .then(() => console.log('MongoDB Connected...'))
@@ -34,6 +34,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use('/api/users', require('./routes/users'));
+app.use('/api/video', require('./routes/video'));
+app.use('/api/subscribe', require('./routes/video'));
 
 
 //use this to show the image you have in node js server to client (react js)

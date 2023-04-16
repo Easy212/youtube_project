@@ -4,15 +4,15 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 const moment = require("moment");
 
-const userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({ //회원가입 스키마 생성
     name: {
         type:String,
         maxlength:50
     },
     email: {
         type:String,
-        trim:true,
-        unique: 1 
+        trim:true, //공백제거
+        unique: 1 //유니크값(고유값)
     },
     password: {
         type: String,
@@ -22,15 +22,15 @@ const userSchema = mongoose.Schema({
         type:String,
         maxlength: 50
     },
-    role : {
-        type:Number,
-        default: 0 
+    role : { //회원 등급
+        type:Number, 
+        default: 0  //지정안할시 디폴트값
     },
     image: String,
-    token : {
+    token : { //토큰을 이용해 유효성 검사
         type: String,
     },
-    tokenExp :{
+    tokenExp :{ //토큰 유효기간(사용가능시간)
         type: Number
     }
 })
@@ -88,6 +88,6 @@ userSchema.statics.findByToken = function (token, cb) {
     })
 }
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema); // 
 
-module.exports = { User }
+module.exports = { User } //다른곳에서 쓸수있게 익스포트
