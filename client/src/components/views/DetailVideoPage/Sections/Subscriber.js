@@ -10,32 +10,31 @@ function Subscriber(props) {
     const onSubscribe = ( ) => {
 
         let subscribeVariables = {
-                userTo : userTo, 
-                userFrom : userFrom
+                userTo : userTo, //디테일 비디오 페이지에서 props로 받음
+                userFrom : userFrom//디테일 비디오 페이지에서 props로 받음
         }
 
         if(Subscribed) {
-            //when we are already subscribed 
-            axios.post('/api/subscribe/unSubscribe', subscribeVariables)
-                .then(response => {
-                    if(response.data.success){ 
-                        setSubscribeNumber(SubscribeNumber - 1)
-                        setSubscribed(!Subscribed)
-                    } else {
-                        alert('Failed to unsubscribe')
+            //이미 구독중이라면
+            axios.post('/api/subscribe/unSubscribe', subscribeVariables) //요청 날리기
+                .then(response => { //서버에서 응답
+                    if(response.data.success){  //응답성공시
+                        setSubscribeNumber(SubscribeNumber - 1) //구독취소하는 것이니 기존 SubscribeNumber에 -1
+                        setSubscribed(!Subscribed) // Subscribed상태를 현재의 Subscribed의 반대 즉 Subscribe
+                    } else { //응답 실패시
+                        alert('구독취소를 실패 했습니다')
                     }
                 })
 
         } else {
-            // when we are not subscribed yet
-            
-            axios.post('/api/subscribe/subscribe', subscribeVariables)
-                .then(response => {
-                    if(response.data.success) {
-                        setSubscribeNumber(SubscribeNumber + 1)
-                        setSubscribed(!Subscribed)
-                    } else {
-                        alert('Failed to subscribe')
+            // 아직 구독중이 아니라면
+            axios.post('/api/subscribe/subscribe', subscribeVariables) //요청 날리기
+                .then(response => { //서버에서 응답
+                    if(response.data.success) { //응답성공시
+                        setSubscribeNumber(SubscribeNumber + 1) //구독을 하는 것이니 기존 SubscribeNumber에 +1
+                        setSubscribed(!Subscribed) // Subscribed상태를 현재의 Subscribe의 반대 즉 Subscribed
+                    } else { //응답 실패시
+                        alert('구독을 실패 했습니다')
                     }
                 })
         }

@@ -8,12 +8,6 @@ const cookieParser = require("cookie-parser");
 
 const config = require("./config/key");
 
-// const mongoose = require("mongoose");
-// mongoose
-//   .connect(config.mongoURI, { useNewUrlParser: true })
-//   .then(() => console.log("DB connected"))
-//   .catch(err => console.error(err));
-
 const mongoose = require("mongoose"); //몽고DB연결
 const connect = mongoose.connect(config.mongoURI, //몽고DB연결
   {
@@ -33,9 +27,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use('/api/users', require('./routes/users'));
-app.use('/api/video', require('./routes/video'));
-app.use('/api/subscribe', require('./routes/video'));
+
+// Express.js를 사용하여 경로설정 
+app.use('/api/users', require('./routes/users')); // /api/users 경로로 들어오는 요청은 ./routes/users 모듈에서 처리
+app.use('/api/video', require('./routes/video'));// /api/video 경로로 들어오는 요청은 ./routes/video모듈에서 처리
+app.use('/api/subscribe', require('./routes/subscribe')); // //api/subscribe 경로로 들어오는 요청은 ./routes/subscribe 모듈에서 처리
 
 
 //use this to show the image you have in node js server to client (react js)

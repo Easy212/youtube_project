@@ -4,7 +4,7 @@ function SideVideo() {
 
     const [SideVideos, setSideVideos] = useState([])
 
-    useEffect(() => {
+    useEffect(() => { //DB에서 동영상 정보 가져오기
         axios.get('/api/video/getVideos')
             .then(response => {
                 if (response.data.success) {
@@ -18,7 +18,7 @@ function SideVideo() {
 
     }, [])
 
-    const sideVideoItem = SideVideos.map(( video, index) => {
+    const sideVideoItem = SideVideos.map(( video, index) => { //map 으로 여러개의 비디오 가져오기
 
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor(video.duration - minutes * 60);

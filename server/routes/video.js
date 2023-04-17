@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 var ffmpeg = require('fluent-ffmpeg');
 const { Video } = require("../models/Video");
-//const { Subscriber } = require("../models/Subscriber");
+const { Subscriber } = require("../models/Subscriber");
 const { auth } = require("../middleware/auth");
 
 var storage = multer.diskStorage({
@@ -90,7 +90,7 @@ router.get("/getVideos", (req, res) => {
     //비디오를 DB에서 가져온 후 클라이언트에 보여주기
     Video.find() //Video 모델에서 찾기
         .populate('writer') // populate을 해주지않으면 모든 정보가아닌 writer의 ID값만 가져옴
-        .exec((err, videos) => { //Mongoose 쿼리
+        .exec((err, videos) => { //Mongoose 쿼리(콜백함수)
             if(err) return res.status(400).send(err); //에러 발생시 400메세지와 에러메세지 리턴
             res.status(200).json({ success: true, videos }) //성공시 200메세지와 비디오정보 리턴
         })
@@ -101,31 +101,30 @@ router.post("/getVideoDetail", (req, res) => {
 
     Video.findOne({ "_id" : req.body.videoId })//id값을 이용해 비디오 찾기
     .populate('writer')  // populate을 해주지않으면 모든 정보가아닌 writer의 ID값만 가져옴
-    .exec((err, video) => { //Mongoose 쿼리  
+    .exec((err, video) => { //Mongoose 쿼리(콜백함수) 
         if(err) return res.status(400).send(err); //에러 발생시 400메세지와 에러메세지 리턴
         res.status(200).json({ success: true, video }) //성공시 200메세지와 비디오정보 리턴
     }) 
 });
 
 
+//구독한 비디오
 router.post("/getSubscriptionVideos", (req, res) => {
 
-
-    //Need to find all of the Users that I am subscribing to From Subscriber Collection 
-    
+    // 내 아이디를 가지고 구독한 사람 찾기
     Subscriber.find({ 'userFrom': req.body.userFrom })
     .exec((err, subscribers)=> {
         if(err) return res.status(400).send(err);
 
-        let subscribedUser = [];
+        let subscribedUser = []; //userto 정보담을 빈배열
 
         subscribers.map((subscriber, i)=> {
             subscribedUser.push(subscriber.userTo)
         })
 
 
-        //Need to Fetch all of the Videos that belong to the Users that I found in previous step. 
-        Video.find({ writer: { $in: subscribedUser }})
+        // 찾은사람들의 비디오를 가져오기
+        Video.find({ writer: { $in: subscribedUser }})// 여러명 일땐req.body사용불가 / $in: 메소드 =
             .populate('writer')
             .exec((err, videos) => {
                 if(err) return res.status(400).send(err);

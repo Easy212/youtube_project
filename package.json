@@ -1,7 +1,7 @@
 {
-  "name": "react-boiler-plate",
+  "name": "youtube",
   "version": "1.0.0",
-  "description": "react boiler plate",
+  "description": "youtube_project",
   "main": "index.js",
   "engine": {
     "node": "16.13.0",
@@ -13,7 +13,7 @@
     "frontend": "npm run start --prefix client",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
-  "author": "John ahn",
+  "author": "easy",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",

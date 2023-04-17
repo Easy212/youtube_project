@@ -10,7 +10,7 @@ function LandingPage() {
     const [Videos, setVideos] = useState([]) //비디오 정보 배열에 저장
 
     useEffect(() => { //몽고DB에서 DOM이 로드 되자마자 실행
-        axios.get('/api/video/getVideos')
+        axios.get('/api/video/getVideos') //db에서 비디오정보 가져오기
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data.videos)
@@ -28,7 +28,7 @@ function LandingPage() {
 
         return <Col lg={6} md={8} xs={24}> {/* 창크기가 가장클때는 6, 중간일때는 8, 가장작을때는 24 사이즈 (반응형)*/}
             <div style={{ position: 'relative' }}> 
-                <a href={`/video/${video._id}`} > {/* 클릭시 링크 */}
+                <a href={`/video/${video._id}`} > {/* 클릭시 상세페이지로 넘어가는 링크 */}
                 <img style={{ width: '100%' }} alt="thumbnail" src={`http://localhost:5000/${video.thumbnail}`} />{/* 썸네일부분 */}
                 <div className=" duration"
                     style={{ bottom: 0, right:0, position: 'absolute', margin: '4px', 
@@ -56,7 +56,7 @@ function LandingPage() {
 
     return (
         <div style={{ width: '85%', margin: '3rem auto' }}>
-            /
+            <Title level={2} > 추천 동영상 </Title>
             <hr />
 
             <Row gutter={16}>
