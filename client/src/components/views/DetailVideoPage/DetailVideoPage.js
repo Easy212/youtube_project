@@ -48,6 +48,8 @@ function DetailVideoPage(props) {
 
 
     if (Video.writer) { //이미지 정보를 가져오기전에 DetailVideoPage이 먼저 렌더링되면 에러가뜨니까 Video.writer가 있을 경우에만 랜더링
+       const SubscribeButton =  Video.writer._id !== localStorage.getItem('userId') && <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} />
+       
        return ( 
             <Row> {/*  Ant Design 그리드 방식*/}
                 <Col lg={18} xs={24}> {/*반응형 사이즈 조절 */}
@@ -56,7 +58,7 @@ function DetailVideoPage(props) {
 
                         <List.Item
                             actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}  />, //좋아요
-                            <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} />]} //구독 
+                            SubscribeButton]} 
                         >
                             <List.Item.Meta
                                 avatar={<Avatar src={Video.writer && Video.writer.image} />} //유저 이미지

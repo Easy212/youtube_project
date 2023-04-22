@@ -5,7 +5,7 @@ const { Comment } = require("../models/Comment");
 const { auth } = require("../middleware/auth");
 
 //=================================
-//             Subscribe
+//             Comment
 //=================================
 
 
