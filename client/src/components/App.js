@@ -17,7 +17,7 @@ function App() {
   return (
     <Suspense fallback={(<div>Loading...</div>)}> {/* fallback = 로딩 중임을 나타내는 UI를 지정하는 속성*/}
       <NavBar />
-      <div stylbe={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
+      <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
         <Switch> {/* 컴포넌트를 그룹화하고 그 중 하나만 렌더링 */}
           <Route exact path="/" component={Auth(LandingPage, null)} /> {/* null = 로그인 관계없이 이동 */}
           <Route exact path="/login" component={Auth(LoginPage, false)} /> {/* false = 로그인 되어있으면 이동 */}

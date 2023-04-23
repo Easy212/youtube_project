@@ -47,7 +47,7 @@ function LandingPage() {
             />
             <span>{video.writer.name} </span><br /> {/* 작성자 이름 */}
             <span style={{ marginLeft: '3rem' }}> {video.views}</span>  {/* 비디오 조회수*/}
-            - <span> {moment(video.createdAt).format("MMM Do YY")} </span>{/* 업데이트 날짜 */}
+            - <span> {moment(video.createdAt).format("YYYY.mm.DD")} </span>{/* 업데이트 날짜 */}
         </Col>
 
     })

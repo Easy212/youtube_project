@@ -3,6 +3,8 @@ import { Comment, Avatar, Button, Input } from 'antd';
 import Axios from 'axios';
 import { useSelector } from 'react-redux';
 import LikeDislikes from './LikeDislikes';
+
+
 const { TextArea } = Input;
 function SingleComment(props) {
     const user = useSelector(state => state.user);
@@ -35,7 +37,7 @@ function SingleComment(props) {
                     setOpenReply(!OpenReply)
                     props.refreshFunction(response.data.result)
                 } else {
-                    alert('Failed to save Comment')
+                    alert('댓글 저장에 실패 했습니다.')
                 }
             })
     }
