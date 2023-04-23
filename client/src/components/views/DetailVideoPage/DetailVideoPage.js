@@ -68,7 +68,7 @@ function DetailVideoPage(props) {
                             <div></div>
                         </List.Item>
 
-                        <Comments CommentLists={CommentLists} postId={Video._id} refreshFunction={updateComment} />{/* 댓글 부분 미구현*/}
+                        <Comments CommentLists={CommentLists} postId={Video._id} refreshFunction={updateComment} /> {/* 댓글리스트*/}
 
                     </div>
                 </Col>
