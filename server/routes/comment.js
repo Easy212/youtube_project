@@ -5,11 +5,11 @@ const { Comment } = require("../models/Comment");
 const { auth } = require("../middleware/auth");
 
 //=================================
-//             Subscribe
+//             Comment
 //=================================
 
 
-router.post("/saveComment", (req, res) => {
+router.post("/saveComment", (req, res) => { //댓글 저장하기
 
     const comment = new Comment(req.body)
 

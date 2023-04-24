@@ -29,7 +29,7 @@ function Comments(props) {
                     setComment("")
                     props.refreshFunction(response.data.result)
                 } else {
-                    alert('Failed to save Comment')
+                    alert('댓글저장에 실패 했습니다')
                 }
             })
     }
@@ -37,9 +37,9 @@ function Comments(props) {
     return (
         <div>
             <br />
-            <p> replies</p>
+            <p>댓글목록</p>
             <hr />
-            {/* Comment Lists  */}
+            {/* 댓글리스트  */}
             {console.log(props.CommentLists)}
 
             {props.CommentLists && props.CommentLists.map((comment, index) => (
@@ -59,7 +59,7 @@ function Comments(props) {
                     style={{ width: '100%', borderRadius: '5px' }}
                     onChange={handleChange}
                     value={Comment}
-                    placeholder="write some comments"
+                    placeholder="댓글을 작성해주세요"
                 />
                 <br />
                 <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>

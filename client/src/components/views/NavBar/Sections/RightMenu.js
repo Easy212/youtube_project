@@ -14,7 +14,7 @@ function RightMenu(props) {
       if (response.status === 200) {
         props.history.push("/login");
       } else {
-        alert('Log Out Failed')
+        alert('로그아웃에 실패 했습니다')
       }
     });
   };
@@ -34,7 +34,7 @@ function RightMenu(props) {
     return ( 
       <Menu mode={props.mode}>
         <Menu.Item key="upload">
-          <a href="/video/upload">Video</a>
+          <a href="/video/upload">동영상 업로드</a>
         </Menu.Item>
         <Menu.Item key="logout">
           <a onClick={logoutHandler}>로그아웃</a>

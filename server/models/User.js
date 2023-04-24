@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({ //회원가입 스키마 생성
         type:Number, 
         default: 0  //지정안할시 디폴트값
     },
-    image: String,
+    image: String, //유저 이미지
     token : { //토큰을 이용해 유효성 검사
         type: String,
     },

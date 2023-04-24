@@ -10,16 +10,16 @@ function LandingPage() {
     const [Videos, setVideos] = useState([]) //비디오 정보 배열에 저장
 
     useEffect(() => { //몽고DB에서 DOM이 로드 되자마자 실행
-        axios.get('/api/video/getVideos') //db에서 비디오정보 가져오기
-            .then(response => {
-                if (response.data.success) {
+        axios.get('/api/video/getVideos') //db에서 비디오정보 가져오기 = axios 라이브러리를 사용하여 비동기 GET 요청
+            .then(response => {//요청에대한 응답
+                if (response.data.success) {  //성공시
                     console.log(response.data.videos)
-                    setVideos(response.data.videos)
-                } else {
+                    setVideos(response.data.videos) // Videos 상태 변수를 videos 속성 값으로 업데이트
+                } else { //실패시
                     alert('비디오 가져오기를 실패했습니다')
                 }
             })
-    }, []) //[] = DOM실행됬을때 한번만 실행
+    }, []) //[] =  배열을 useEffect의 두 번째 인자로 전달함으로써 DOM실행됬을때 한번만 실행 
 
     const renderCards = Videos.map((video, index) => { // map형식으로 
 
@@ -30,7 +30,7 @@ function LandingPage() {
             <div style={{ position: 'relative' }}> 
                 <a href={`/video/${video._id}`} > {/* 클릭시 상세페이지로 넘어가는 링크 */}
                 <img style={{ width: '100%' }} alt="thumbnail" src={`http://localhost:5000/${video.thumbnail}`} />{/* 썸네일부분 */}
-                <div className=" duration"
+                <div className=" duration" //러닝타임
                     style={{ bottom: 0, right:0, position: 'absolute', margin: '4px', 
                     color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8, 
                     padding: '2px 4px', borderRadius:'2px', letterSpacing:'0.5px', fontSize:'12px',
@@ -47,7 +47,7 @@ function LandingPage() {
             />
             <span>{video.writer.name} </span><br /> {/* 작성자 이름 */}
             <span style={{ marginLeft: '3rem' }}> {video.views}</span>  {/* 비디오 조회수*/}
-            - <span> {moment(video.createdAt).format("MMM Do YY")} </span>{/* 업데이트 날짜 */}
+            - <span> {moment(video.createdAt).format("YYYY.mm.DD")} </span>{/* 업데이트 날짜 */}
         </Col>
 
     })

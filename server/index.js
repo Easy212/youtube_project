@@ -7,14 +7,15 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const config = require("./config/key");
-
-const mongoose = require("mongoose"); //몽고DB연결
+const mongoose = require("mongoose"); //몽고DB연결을 위한 mongoose 
 const connect = mongoose.connect(config.mongoURI, //몽고DB연결
   {
     useNewUrlParser: true, useUnifiedTopology: true, //에러가 뜬다는데
     useCreateIndex: true, useFindAndModify: false
   })
-  .then(() => console.log('MongoDB Connected...'))
+
+  .then(() => console.log('MongoDB 연결됨'))
+
   .catch(err => console.log(err));
 
 app.use(cors())
@@ -32,6 +33,8 @@ app.use(cookieParser());
 app.use('/api/users', require('./routes/users')); // /api/users 경로로 들어오는 요청은 ./routes/users 모듈에서 처리
 app.use('/api/video', require('./routes/video'));// /api/video 경로로 들어오는 요청은 ./routes/video모듈에서 처리
 app.use('/api/subscribe', require('./routes/subscribe')); // //api/subscribe 경로로 들어오는 요청은 ./routes/subscribe 모듈에서 처리
+app.use('/api/comment', require('./routes/comment'));
+app.use('/api/like', require('./routes/like'));
 
 
 //use this to show the image you have in node js server to client (react js)
@@ -54,5 +57,5 @@ if (process.env.NODE_ENV === "production") {
 const port = process.env.PORT || 5000
 
 app.listen(port, () => {
-  console.log(`Server Listening on ${port}`)
+  console.log(`서버 포트연결 ${port}`)
 });
