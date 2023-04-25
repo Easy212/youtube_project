@@ -88,7 +88,7 @@ router.get("/getVideos", (req, res) => {
     
     Video.find() //Video 모델에서 찾기
         .populate('writer') // populate을 해주지않으면 모든 정보가아닌 writer의 ID값만 가져옴
-        .exec((err, videos) => { //Mongoose 쿼리(콜백함수)
+        .exec((err, videos) => { //Mongoose 쿼리실행
             if(err) return res.status(400).send(err); //에러 발생시 400코드와 에러메세지 리턴
             res.status(200).json({ success: true, videos }) //성공시 200코드와 비디오정보 리턴
         })

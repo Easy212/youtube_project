@@ -41,7 +41,6 @@ function RegisterPage(props) {
     <Formik
       initialValues={{
         email: '',
-        lastName: '',
         name: '',
         password: '',
         confirmPassword: ''
@@ -49,8 +48,6 @@ function RegisterPage(props) {
       validationSchema={Yup.object().shape({
         name: Yup.string()
           .required('이름입력은 필수입니다.'),
-        lastName: Yup.string()
-          .required('성 입력은 필수입니다.'),
         email: Yup.string()
           .email('이메일 주소 형식이 맞지않습니다.')
           .required('이메일 입력은 필수입니다.'),
@@ -68,7 +65,6 @@ function RegisterPage(props) {
             email: values.email,
             password: values.password,
             name: values.name,
-            lastname: values.lastname,
             image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
           };
 
@@ -98,40 +94,23 @@ function RegisterPage(props) {
         } = props;
         return (
           <div className="app">
-            <h2>Sign up</h2>
+            <h2>회원가입</h2>
             <Form style={{ minWidth: '375px' }} {...formItemLayout} onSubmit={handleSubmit} >
 
-              <Form.Item required label="Name">
+              <Form.Item required label="이름">
                 <Input
                   id="name"
-                  placeholder="Enter your name"
+                  placeholder="이름을 입력해주세요"
                   type="text"
                   value={values.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
+                  onChange={handleChange} //입력 필드의 값이 변경될 때마다 실행
+                  onBlur={handleBlur} //입력 필드가 포커스를 잃을 때 실행
+                  className={ 
                     errors.name && touched.name ? 'text-input error' : 'text-input'
                   }
                 />
                 {errors.name && touched.name && (
                   <div className="input-feedback">{errors.name}</div>
-                )}
-              </Form.Item>
-
-              <Form.Item required label="성">
-                <Input
-                  id="lastName"
-                  placeholder="성을 입력해주세요"
-                  type="text"
-                  value={values.lastName}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
-                    errors.lastName && touched.lastName ? 'text-input error' : 'text-input'
-                  }
-                />
-                {errors.lastName && touched.lastName && (
-                  <div className="input-feedback">{errors.lastName}</div>
                 )}
               </Form.Item>
 

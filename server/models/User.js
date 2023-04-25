@@ -18,10 +18,6 @@ const userSchema = mongoose.Schema({ //회원가입 스키마 생성
         type: String,
         minglength: 5
     },
-    lastname: {
-        type:String,
-        maxlength: 50
-    },
     role : { //회원 등급
         type:Number, 
         default: 0  //지정안할시 디폴트값

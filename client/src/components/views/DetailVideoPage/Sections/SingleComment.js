@@ -75,7 +75,7 @@ function SingleComment(props) {
                         placeholder="답글을 작성 해주세요"
                     />
                     <br />
-                    <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>댓글 달기</Button>
+                    <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>답글 달기</Button>
                 </form>
             }
 
