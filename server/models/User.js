@@ -84,6 +84,6 @@ userSchema.statics.findByToken = function (token, cb) {
     })
 }
 
-const User = mongoose.model('User', userSchema); // 
+const User = mongoose.model('User', userSchema); 
 
 module.exports = { User } //다른곳에서 쓸수있게 익스포트

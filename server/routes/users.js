@@ -43,9 +43,9 @@ router.post("/login", (req, res) => {
                 message: "인증실패, 이메일 주소를 찾을수 없습니다"
             });
 
-        user.comparePassword(req.body.password, (err, isMatch) => {
-            if (!isMatch)
-                return res.json({ loginSuccess: false, message: "비밀번호가 일치하지않습니다" });
+        user.comparePassword(req.body.password, (err, isMatch) => { //로그인 폼에서 입력한 비밀번호를 전달
+            if (!isMatch) //비밀번호가 일치하지않는다면
+                return res.json({ loginSuccess: false, message: "비밀번호가 일치하지 않습니다" });
 
             user.generateToken((err, user) => {
                 if (err) return res.status(400).send(err);
