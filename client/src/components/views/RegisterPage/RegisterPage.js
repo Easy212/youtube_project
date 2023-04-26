@@ -105,8 +105,11 @@ function RegisterPage(props) {
                   value={values.name}
                   onChange={handleChange} //입력 필드의 값이 변경될 때마다 실행
                   onBlur={handleBlur} //입력 필드가 포커스를 잃을 때 실행
-                  className={ 
-                    errors.name && touched.name ? 'text-input error' : 'text-input'
+                  className={ //입력 필드의 CSS 클래스를 지정
+                    //errors.name과 touched.name 중 하나라도 false 인경우 
+                    //즉 해당 입력 필드에 대한 유효성 검사 오류보정가 없거나
+                    //이 필드에 대해 사용자가 아직 터치하지 않았을 경우 'text-input' 클래스를 반환
+                    errors.name && touched.name ? 'text-input error' : 'text-input' //유효성 검사 결과에 따라 동적으로 결정
                   }
                 />
                 {errors.name && touched.name && (

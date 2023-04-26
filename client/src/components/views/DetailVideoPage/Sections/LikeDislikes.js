@@ -26,17 +26,17 @@ function LikeDislikes(props) {
                 console.log('getLikes',response.data)
 
                 if (response.data.success) {
-                    //How many likes does this video or comment have 
+                    //이 동영상 좋아요 및 댓글의 수
                     setLikes(response.data.likes.length)
 
-                    //if I already click this like button or not 
+                    //좋아요 버튼을 클릭했는지 여부
                     response.data.likes.map(like => {
                         if (like.userId === props.userId) {
                             setLikeAction('liked')
                         }
                     })
                 } else {
-                    alert('Failed to get likes')
+                    alert('좋아요 정보 불러오기를 실패했습니다')
                 }
             })
 
@@ -44,17 +44,17 @@ function LikeDislikes(props) {
             .then(response => {
                 console.log('getDislike',response.data)
                 if (response.data.success) {
-                    //How many likes does this video or comment have 
+                    //이 동영상 좋아요 및 댓글의 수
                     setDislikes(response.data.dislikes.length)
 
-                    //if I already click this like button or not 
+                    //좋아요 버튼을 클릭했는지 여부
                     response.data.dislikes.map(dislike => {
                         if (dislike.userId === props.userId) {
                             setDislikeAction('disliked')
                         }
                     })
                 } else {
-                    alert('Failed to get dislikes')
+                    alert('싫어요 정보 불러오기를 실패했습니다')
                 }
             })
 
@@ -72,7 +72,7 @@ function LikeDislikes(props) {
                         setLikes(Likes + 1)
                         setLikeAction('liked')
 
-                        //If dislike button is already clicked
+                        //싫어요 버튼이 이미 클릭되어있는 경우
 
                         if (DislikeAction !== null) {
                             setDislikeAction(null)
@@ -81,7 +81,7 @@ function LikeDislikes(props) {
 
 
                     } else {
-                        alert('Failed to increase the like')
+                        alert('좋아요 증가 실패')
                     }
                 })
 
@@ -96,7 +96,7 @@ function LikeDislikes(props) {
                         setLikeAction(null)
 
                     } else {
-                        alert('Failed to decrease the like')
+                        alert('좋아요 감소 실패')
                     }
                 })
 
@@ -117,7 +117,7 @@ function LikeDislikes(props) {
                         setDislikeAction(null)
 
                     } else {
-                        alert('Failed to decrease dislike')
+                        alert('싫어요 증가 실패')
                     }
                 })
 
@@ -130,14 +130,14 @@ function LikeDislikes(props) {
                         setDislikes(Dislikes + 1)
                         setDislikeAction('disliked')
 
-                        //If dislike button is already clicked
+                        //싫어요 버튼이 이미 클릭되어있는 경우
                         if(LikeAction !== null ) {
                             setLikeAction(null)
                             setLikes(Likes - 1)
                         }
 
                     } else {
-                        alert('Failed to increase dislike')
+                        alert('싫어 감소 실패')
                     }
                 })
 

@@ -11,7 +11,7 @@ function SideVideo() {
                     console.log(response.data.videos)
                     setSideVideos(response.data.videos)
                 } else {
-                    alert('Failed to get Videos')
+                    alert('동영상을 불러오는데 실패 했습니다')
                 }
             })
         
@@ -26,7 +26,7 @@ function SideVideo() {
        return <div style={{ display: 'flex', marginTop: '1rem', padding: '0 2rem' }}>
         <div style={{ width:'40%', marginRight:'1rem' }}>
             <a href={`/video/${video._id}`}  style={{ color:'gray' }}>
-                <img style={{ width: '100%' }} src={`ㅎhttp://localhost:5000/${video.thumbnail}`} alt="thumbnail" />
+                <img style={{ width: '100%' }} src={`http://localhost:5000/${video.thumbnail}`} alt="thumbnail" />
             </a>
         </div>
 
