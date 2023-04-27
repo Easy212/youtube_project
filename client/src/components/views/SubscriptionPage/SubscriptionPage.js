@@ -6,6 +6,8 @@ import moment from 'moment';
 const { Title } = Typography;
 const { Meta } = Card;
 
+
+//구독한 동영상 페이지
 function SubscriptionPage() {
   
     const [Videos, setVideos] = useState([])
@@ -18,7 +20,7 @@ function SubscriptionPage() {
                 if (response.data.success) {
                     setVideos(response.data.videos)
                 } else {
-                    alert('Failed to get subscription videos')
+                    alert('구독한 동영상 정보 가져오기를 실패했습니다')
                 }
             })
     }, [])
