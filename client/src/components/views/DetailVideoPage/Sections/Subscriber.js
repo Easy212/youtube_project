@@ -4,10 +4,10 @@ import axios from 'axios';
 function Subscriber(props) {
     const userTo = props.userTo
     const userFrom = props.userFrom
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [SubscribeNumber, setSubscribeNumber] = useState(0) //구독자수는 0부터시작
     const [Subscribed, setSubscribed] = useState(false) //기본값 false
-
+    
     const onSubscribe = ( ) => {
 
         let subscribeVariables = {
@@ -23,7 +23,7 @@ function Subscriber(props) {
                         setSubscribeNumber(SubscribeNumber - 1) //구독취소하는 것이니 기존 SubscribeNumber에 -1
                         setSubscribed(!Subscribed) // 현재 구독상태를 반대로 변경(구독 중인 상태에서 구독 취소를 하면 Subscribed를 false로 변경)
                     } else { //응답 실패시
-                        alert('구독취소를 실패 했습니다')
+                        alert('로그인이 필요 합니다.')
                     }
                 })
 
@@ -35,7 +35,7 @@ function Subscriber(props) {
                         setSubscribeNumber(SubscribeNumber + 1) //구독을 하는 것이니 기존 SubscribeNumber에 +1
                         setSubscribed(!Subscribed) // 현재 구독상태를 반대로 변경(구독 중이지 않은 상태에서 구독을 하면 Subscribed를 true로 변경)
                     } else { //응답 실패시
-                        alert('구독을 실패 했습니다')
+                        alert('로그인이 필요 합니다.')
                     }
                 })
         }

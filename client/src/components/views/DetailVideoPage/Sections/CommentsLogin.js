@@ -6,7 +6,7 @@ import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
 const { TextArea } = Input;
 
-function Comments(props) {
+function CommentsLogin(props) {
     const user = useSelector(state => state.user)
     const [Comment, setComment] = useState("")
 
@@ -69,4 +69,4 @@ function Comments(props) {
     )
 }
 
-export default Comments
+export default CommentsLogin

@@ -1,14 +1,22 @@
 const express = require('express');
 const router = express.Router();
-
-
 const { Subscriber } = require("../models/Subscriber");
-
+const { auth } = require("../middleware/auth");
 
 
 //=================================
 //             Subscribe
 //=================================
+
+// 로그인 체크 미들웨어 함수
+const requireLogin = (req, res, next) => {
+    if (req.user) {
+      next();
+    } else {
+      res.redirect('/login');
+    }
+  };
+
 
 //구독자수 확인
 router.post("/subscribeNumber", (req, res) => { 
@@ -41,7 +49,7 @@ router.post("/subscribed", (req, res) => {
 
 
 // 아직 구독중이 아니라면
-router.post("/subscribe", (req, res) => { //db에 
+router.post("/subscribe", auth,(req, res) => { //db에 
 
     const subscribe = new Subscriber(req.body); //모든 정보(userTo와 userFrom을 저장)
 
@@ -53,7 +61,7 @@ router.post("/subscribe", (req, res) => { //db에
 });
 
 //이미 구독중이라면
-router.post("/unSubscribe", (req, res) => {
+router.post("/unSubscribe", auth,(req, res) => {
 
     console.log(req.body)
 
