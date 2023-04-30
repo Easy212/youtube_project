@@ -9,6 +9,7 @@ const { auth } = require("../middleware/auth");
 //             Likes DisLikes
 //=================================
 
+//좋아요 정보 불러오기
 router.post("/getLikes", (req, res) => {
 
     let variable = {}
@@ -27,7 +28,7 @@ router.post("/getLikes", (req, res) => {
 
 })
 
-
+//싫어요 정보 불러오기
 router.post("/getDislikes", (req, res) => {
 
     let variable = {}
@@ -133,17 +134,4 @@ router.post("/upDisLike", (req, res) => {
 
 
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = router;

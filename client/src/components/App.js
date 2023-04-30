@@ -10,6 +10,7 @@ import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer"
 import UploadVideoPage from './views/UploadVideoPage/UploadVideoPage.js';
 import DetailVideoPage from './views/DetailVideoPage/DetailVideoPage.js'
+import EditVideoPage from './views/DetailVideoPage/EditVideoPage.js'
 import SubscriptionPage from './views/SubscriptionPage/SubscriptionPage.js'
 
 
@@ -23,7 +24,8 @@ function App() {
           <Route exact path="/login" component={Auth(LoginPage, false)} /> {/* false = 로그인 되어있으면 이동 */}
           <Route exact path="/register" component={Auth(RegisterPage, false)} /> {/* false = 로그인 안되어있으면 이동 */}
           <Route exact path="/video/upload" component={Auth(UploadVideoPage, true)} /> {/* true = 로그인 해야만 이동  */}      
-          <Route exact path="/video/:videoId" component={Auth(DetailVideoPage, null)} /> {/* null = 로그인 관계없이 이동 */}      
+          <Route exact path="/video/:videoId" component={Auth(DetailVideoPage, null)} /> {/* null = 로그인 관계없이 이동 */}   
+          <Route exact path="/video/edit/:videoId" component={Auth(EditVideoPage, true)} /> 
           <Route exact path="/subscription" component={Auth(SubscriptionPage, true)} /> {/* true =로그인 해야만 이동 */} 
         </Switch>
       </div>

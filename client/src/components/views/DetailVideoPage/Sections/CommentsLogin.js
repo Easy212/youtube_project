@@ -17,6 +17,12 @@ function CommentsLogin(props) {
     const onSubmit = (e) => {
         e.preventDefault();
 
+        // 로그인되어 있지 않은 경우
+        if (!user.userData.isAuth) {
+            alert('로그인 후에 댓글을 작성할 수 있습니다.');
+            return;
+        }
+
         const variables = {
             content: Comment,
             writer: user.userData._id,
@@ -29,7 +35,7 @@ function CommentsLogin(props) {
                     setComment("")
                     props.refreshFunction(response.data.result)
                 } else {
-                    alert('댓글저장에 실패 했습니다')
+                    alert('댓글저장에 실패 했습니다.')
                 }
             })
     }

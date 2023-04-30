@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { Comment } = require("../models/Comment");
-
 const { auth } = require("../middleware/auth");
 
 //=================================
@@ -9,7 +8,7 @@ const { auth } = require("../middleware/auth");
 //=================================
 
 
-router.post("/saveComment", (req, res) => { //댓글 저장하기
+router.post("/saveComment", auth, (req, res) => { //댓글 저장하기
 
     const comment = new Comment(req.body) //Comment 스키마를 사용하여 새로운 Comment 모델을 생성
 
@@ -36,5 +35,25 @@ router.post("/getComments", (req, res) => {
         })
 
 });
+
+
+router.patch('/editComment', auth, (req, res) => { //댓글 수정하기
+
+    Comment.findByIdAndUpdate(req.body.commentId, { content: req.body.content }, { new: true }, (err, comment) => {
+        if (err) return res.json({ success: false, err })
+        return res.status(200).json({ success: true, comment })
+    })
+
+})
+
+router.delete('/deleteComment', auth, (req, res) => { //댓글 삭제하기
+
+    Comment.findOneAndDelete({ _id: req.body.commentId, writer: req.user._id }, (err, comment) => {
+        if (err) return res.json({ success: false, err })
+        if (!comment) return res.json({ success: false, message: '해당 댓글을 찾을 수 없습니다.' })
+        return res.status(200).json({ success: true })
+    })
+
+})
 
 module.exports = router;

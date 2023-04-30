@@ -83,6 +83,8 @@ router.post("/thumbnail", (req, res) => {
 
 });
 
+
+
 //비디오를 DB에서 가져온 후 클라이언트에 보여주기
 router.get("/getVideos", (req, res) => {
     
@@ -129,5 +131,39 @@ router.post("/getSubscriptionVideos", (req, res) => {
             })
     })
 });
+
+
+// 비디오 삭제 요청 처리
+router.post('/deleteVideo', (req, res) => {
+  Video.findOneAndDelete({ _id: req.body.videoId }, (err, video) => {
+    if (err) {
+      return res.json({ success: false, err });
+    }
+    if (!video) {
+      return res.json({ success: false, message: '해당 비디오를 찾을 수 없습니다.' });
+    }
+    return res.json({ success: true });
+  });
+});
+
+
+router.post("/editVideo", (req, res) => {
+    const { videoId, title, description } = req.body;
+  
+    // 수정할 비디오 정보 업데이트
+    Video.findOneAndUpdate(
+      { _id: videoId },
+      { $set: { title: title, description: description } },
+      { new: true }
+    )
+      .exec((err, video) => {
+        if (err) return res.status(400).json({ success: false, err });
+        if (!video)
+          return res.status(404).json({ success: false, message: '해당 비디오를 찾을 수 없습니다.' });
+  
+        return res.status(200).json({ success: true, video });
+      });
+  });
+
 
 module.exports = router;

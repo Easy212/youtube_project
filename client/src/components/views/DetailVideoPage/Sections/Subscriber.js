@@ -4,7 +4,6 @@ import axios from 'axios';
 function Subscriber(props) {
     const userTo = props.userTo
     const userFrom = props.userFrom
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [SubscribeNumber, setSubscribeNumber] = useState(0) //구독자수는 0부터시작
     const [Subscribed, setSubscribed] = useState(false) //기본값 false
     
@@ -59,9 +58,7 @@ function Subscriber(props) {
             .then(response => { //서버에서 응답
                 if (response.data.success) { //응답 성공시
                     setSubscribed(response.data.subcribed) // Subscribed 값이 구독여부(true/false)에 따라 업데이트
-                } else { //응답 실패시
-                    alert('구독정보를 받아오지 못했습니다')
-                }
+                } 
             })
 
     }, [])

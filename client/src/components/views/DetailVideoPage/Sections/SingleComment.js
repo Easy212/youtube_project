@@ -28,6 +28,11 @@ function SingleComment(props) {
             responseTo: props.comment._id,
             content: CommentValue
         }
+        
+        if (!user.userData._id) { //if (!user.userData._id) = user 객체가 null이면 true를 반환 즉 사용자가 로그인하지 않은 경우에는 알림 메시지를 띄우고 종료
+            alert('로그인 후에 답글을 작성할 수 있습니다.');
+            return;
+        }
 
 
         Axios.post('/api/comment/saveComment', variables)

@@ -25,14 +25,14 @@ router.post("/subscribeNumber", (req, res) => {
     .exec((err, subscribe) => { //Mongoose 쿼리(콜백함수)
         if(err) return res.status(400).send(err) //에러 발생시 400코드와 에러메세지 리턴
 
-        res.status(200).json({ success: true, subscribeNumber: subscribe.length  })//성공시 200코드와 0구독자수 리턴
+        res.status(200).json({ success: true, subscribeNumber: subscribe.length  })//성공시 200코드와 구독자수 리턴
     })
 
 });
 
 
 //구독
-router.post("/subscribed", (req, res) => { 
+router.post("/subscribed", auth,(req, res) => { 
 
     Subscriber.find({ "userTo": req.body.userTo , "userFrom": req.body.userFrom }) //하나의 정보라도 있다면 구독을 하고있다는것
     .exec((err, subscribe) => {

@@ -8,6 +8,7 @@ function LikeDislikes(props) {
     const [Dislikes, setDislikes] = useState(0)
     const [LikeAction, setLikeAction] = useState(null)
     const [DislikeAction, setDislikeAction] = useState(null)
+    const [IsLoggedIn, setIsLoggedIn] = useState(false) // 로그인 여부에 따라 좋아요 싫어요를 누를수있음
     let variable = {};
 
     if (props.video) {
@@ -20,6 +21,15 @@ function LikeDislikes(props) {
 
 
     useEffect(() => {
+        // 사용자 정보를 가져와서 로그인 상태를 업데이트
+        Axios.get('/api/users/auth')
+            .then(response => {
+                if (response.data.isAuth) {
+                    setIsLoggedIn(true)
+                } else {
+                    setIsLoggedIn(false)
+                }
+            })
 
         Axios.post('/api/like/getLikes', variable)
             .then(response => {
@@ -62,6 +72,11 @@ function LikeDislikes(props) {
 
 
     const onLike = () => {
+
+        if (!IsLoggedIn) {
+            alert('로그인이 필요합니다.')
+            return
+        }
 
         if (LikeAction === null) {
 
@@ -107,6 +122,11 @@ function LikeDislikes(props) {
 
     const onDisLike = () => {
 
+        if (!IsLoggedIn) {
+            alert('로그인이 필요합니다.')
+            return
+        }
+        
         if (DislikeAction !== null) {
 
             Axios.post('/api/like/unDisLike', variable)
