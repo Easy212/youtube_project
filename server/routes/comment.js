@@ -47,13 +47,13 @@ router.patch('/editComment', auth, (req, res) => { //댓글 수정하기
 })
 
 router.delete('/deleteComment', auth, (req, res) => { //댓글 삭제하기
+    const commentId = req.query.id; 
 
-    Comment.findOneAndDelete({ _id: req.body.commentId, writer: req.user._id }, (err, comment) => {
+    Comment.findOneAndDelete({ _id: commentId, writer: req.user._id }, (err, comment) => {
         if (err) return res.json({ success: false, err })
         if (!comment) return res.json({ success: false, message: '해당 댓글을 찾을 수 없습니다.' })
         return res.status(200).json({ success: true })
     })
-
 })
 
 module.exports = router;

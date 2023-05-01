@@ -15,6 +15,7 @@ function DetailVideoPage(props) {
     const videoId = props.match.params.videoId //해당페이지의 비디오 ID가져오기 (/video/:videoId의 URL해당 페이지의 URL에서 :videoId 자리에 들어가는 값)
     const [Video, setVideo] = useState([])
     const [CommentLists, setCommentLists] = useState([])
+    const [CommentKey, setCommentKey] = useState(0); // key값 추가
     const videoVariable = {videoId: videoId} //비디오 ID값
 
 
@@ -48,15 +49,15 @@ function DetailVideoPage(props) {
     } 
 
     const handleDelete = () => {
-        const confirm = window.confirm("정말로 이 비디오를 삭제하시겠습니까?");
+        const confirm = window.confirm("정말로 이 동영상을 삭제하시겠습니까?");
         if (confirm) {
             axios.post('/api/video/deleteVideo', videoVariable)
                 .then(response => {
                     if (response.data.success) {
-                        alert('비디오 삭제를 성공했습니다.');
+                        alert('동영상 삭제를 성공했습니다.');
                         props.history.push('/');
                     } else {
-                        alert('비디오 삭제를 실패했습니다.');
+                        alert('동영상 삭제를 실패했습니다.');
                     }
                 });
         }
@@ -93,6 +94,7 @@ function DetailVideoPage(props) {
                         </List.Item>
 
                         <CommentsLogin CommentLists={CommentLists} postId={Video._id} refreshFunction={updateComment} /> {/* 댓글리스트*/}
+                        
 
                     </div>
                 </Col>

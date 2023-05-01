@@ -40,23 +40,38 @@ function CommentsLogin(props) {
             })
     }
 
+    const handleDelete = (commentId) => {
+        const confirm = window.confirm("정말로 이 댓글을 삭제하시겠습니까?");
+        if (confirm) {
+          axios.delete(`/api/comment/deleteComment?id=${commentId}`)
+            .then(response => {
+              if (response.data.success) {
+                const newCommentLists = props.CommentLists.filter(comment => comment._id !== commentId);
+                props.refreshFunction(newCommentLists);
+              } else {
+                alert('댓글 삭제에 실패했습니다.');
+              }
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        }
+      };
+
     return (
         <div>
             <br />
             <p>댓글목록</p>
             <hr />
             {/* 댓글리스트  */}
-            {console.log(props.CommentLists)}
-
             {props.CommentLists && props.CommentLists.map((comment, index) => (
-                (!comment.responseTo &&
+                (comment && !comment.responseTo &&
                     <React.Fragment>
-                        <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction} />
+                        <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction} handleDelete={handleDelete} />
                         <ReplyComment CommentLists={props.CommentLists} postId={props.postId} parentCommentId={comment._id} refreshFunction={props.refreshFunction} />
                     </React.Fragment>
                 )
             ))}
-
 
 
             {/* Root Comment Form */}
