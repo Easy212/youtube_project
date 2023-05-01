@@ -80,5 +80,4 @@ function ReplyComment(props) {
         </div>
     )
 }
-
 export default ReplyComment
