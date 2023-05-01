@@ -15,7 +15,9 @@ const connect = mongoose.connect(config.mongoURI, //몽고DB연결
     useNewUrlParser: true, // MongoDB의 새로운 URL 구문을 사용할 수 있도록 지원
     useUnifiedTopology: true, // MongoDB의 새로운 서버 디스커버리 및 모니터링 엔진을 사용하도록 지원
     useCreateIndex: true, //Model.createIndex() 함수가 더 이상 사용되지 않는다는 경고를 피하기 위해 인덱스 생성을 사용
-    useFindAndModify: false // MongoDB 4.0 이상에서 사용되지 않으므로 false로 설정하여 경고를 방지
+    useFindAndModify: false, // MongoDB 4.0 이상에서 사용되지 않으므로 false로 설정하여 경고를 방지
+    serverSelectionTimeoutMS: 600000, // 연결시간 제한설정
+    socketTimeoutMS: 600000 // 소켓 시간제한
   })
 
   .then(() => console.log('MongoDB 연결됨')) //연결 성공시
