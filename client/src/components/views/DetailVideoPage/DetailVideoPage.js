@@ -17,6 +17,10 @@ function DetailVideoPage(props) {
     const [CommentLists, setCommentLists] = useState([])
     const [CommentKey, setCommentKey] = useState(0); // key값 추가
     const videoVariable = {videoId: videoId} //비디오 ID값
+    const refreshFunction = (newCommentLists) => {
+        setCommentLists(newCommentLists);
+    };
+    
 
 
     //비디오 정보 가져오기
@@ -46,6 +50,7 @@ function DetailVideoPage(props) {
 
     const updateComment = (newComment) => {
         setCommentLists(CommentLists.concat(newComment))
+        setCommentKey(CommentKey + 1); // CommentKey 업데이트
     } 
 
     const handleDelete = () => {
@@ -93,7 +98,7 @@ function DetailVideoPage(props) {
                             <div></div>
                         </List.Item>
 
-                        <CommentsLogin CommentLists={CommentLists} postId={Video._id} refreshFunction={updateComment} /> {/* 댓글리스트*/}
+                        <CommentsLogin key={CommentKey} CommentLists={CommentLists} postId={Video._id} refreshFunction={updateComment} /> {/* 댓글리스트*/}
                         
 
                     </div>

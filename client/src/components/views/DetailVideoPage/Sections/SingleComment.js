@@ -52,8 +52,8 @@ function SingleComment(props) {
 
     const onDelete = () => {
         setDeleteConfirm(true);
-    }
-
+    };
+    
     const onOk = () => {
         const commentId = props.comment._id;
         const writerId = props.comment.writer._id;
@@ -68,7 +68,7 @@ function SingleComment(props) {
             .then(response => {
                 if (response.data.success) {
                     setDeleteConfirm(false);
-                    props.refreshFunction(response.data.result);
+                    props.refreshFunction(response.data.result); // 삭제된 댓글의 정보를 전달
                 } else {
                     alert('댓글 삭제에 실패 했습니다.');
                 }

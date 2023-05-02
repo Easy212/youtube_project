@@ -26,7 +26,7 @@ function LandingPage() {
         var minutes = Math.floor(video.duration / 60); //video.duration(러닝타임)/60 = 분
         var seconds = Math.floor(video.duration - minutes * 60); //minutes/60 = 초
 
-        return <Col lg={6} md={8} xs={24}> {/* 창크기가 가장클때는 6, 중간일때는 8, 가장작을때는 24 사이즈 (반응형)*/}
+        return <Col key={video._id} lg={6} md={8} xs={24}> {/* 창크기가 가장클때는 6, 중간일때는 8, 가장작을때는 24 사이즈 (반응형)*/}
             <div style={{ position: 'relative' }}> 
                 <a href={`/video/${video._id}`} > {/* 클릭시 상세페이지로 넘어가는 링크 */}
                 <img style={{ width: '100%' }} alt="thumbnail" src={`http://localhost:5000/${video.thumbnail}`} />{/* 썸네일부분 */}
