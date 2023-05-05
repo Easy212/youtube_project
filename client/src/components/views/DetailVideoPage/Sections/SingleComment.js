@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Comment, Avatar, Button, Input, Modal } from 'antd';
 import Axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -42,7 +42,7 @@ function SingleComment(props) {
           if (response.data.success) {
             setCommentValue("")
             setOpenReply(!OpenReply)
-            return props.refreshFunction(); // API 호출이 완료된 후에 화면을 갱신합니다.
+            return props.refreshFunction(); // API 호출이 완료된 후에 화면을 갱신
           } else {
             alert('댓글 저장에 실패 했습니다.')
           }

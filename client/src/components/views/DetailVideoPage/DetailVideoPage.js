@@ -17,9 +17,7 @@ function DetailVideoPage(props) {
     const [CommentLists, setCommentLists] = useState([])
     const [CommentKey, setCommentKey] = useState(0); // key값 추가
     const videoVariable = {videoId: videoId} //비디오 ID값
-    const refreshFunction = (newCommentLists) => {
-        setCommentLists(newCommentLists);
-    };
+
     
 
 

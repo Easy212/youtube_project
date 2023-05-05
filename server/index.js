@@ -12,7 +12,7 @@ const mongoose = require("mongoose"); //몽고DB연결을 위한 mongoose 불러
 const connect = mongoose.connect(config.mongoURI, //몽고DB연결
   { // 몽구스 6.0부터는 기본값으로 useNewUrlParser와 useUnifiedTopology가 true로 설정
     // useCreateIndex와 useFindAndModify는 true로 설정되어 있지 않으면, MongoDB의 새로운 버전에서 경고가 발생하므로 설정 필요
-    useNewUrlParser: true, // MongoDB의 새로운 URL 구문을 사용할 수 있도록 지원
+    useNewUrlParser: true, // MongoDB의 새로 운 URL 구문을 사용할 수 있도록 지원
     useUnifiedTopology: true, // MongoDB의 새로운 서버 디스커버리 및 모니터링 엔진을 사용하도록 지원
     useCreateIndex: true, //Model.createIndex() 함수가 더 이상 사용되지 않는다는 경고를 피하기 위해 인덱스 생성을 사용
     useFindAndModify: false, // MongoDB 4.0 이상에서 사용되지 않으므로 false로 설정하여 경고를 방지

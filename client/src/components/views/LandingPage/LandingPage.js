@@ -29,12 +29,25 @@ function LandingPage() {
         return <Col key={video._id} lg={6} md={8} xs={24}> {/* 창크기가 가장클때는 6, 중간일때는 8, 가장작을때는 24 사이즈 (반응형)*/}
             <div style={{ position: 'relative' }}> 
                 <a href={`/video/${video._id}`} > {/* 클릭시 상세페이지로 넘어가는 링크 */}
-                <img style={{ width: '100%' }} alt="thumbnail" src={`http://localhost:5000/${video.thumbnail}`} />{/* 썸네일부분 */}
-                <div className=" duration" //러닝타임
-                    style={{ bottom: 0, right:0, position: 'absolute', margin: '4px', 
-                    color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8, 
-                    padding: '2px 4px', borderRadius:'2px', letterSpacing:'0.5px', fontSize:'12px',
-                    fontWeight:'500', lineHeight:'12px' }}>
+                <img 
+                style={{ width: '100%' }} 
+                alt="thumbnail" 
+                src={`http://localhost:5000/${video.thumbnail}`} />{/* 썸네일부분 */}
+                <div 
+                    className=" duration" //러닝타임
+                    style={{ bottom: 0, 
+                            right:0, 
+                            position: 'absolute', 
+                            margin: '4px', 
+                            color: '#fff', 
+                            backgroundColor: 'rgba(17, 17, 17, 0.8)', 
+                            opacity: 0.8, 
+                            padding: '2px 4px', 
+                            borderRadius:'2px', 
+                            letterSpacing:'0.5px', 
+                            fontSize:'12px',
+                            fontWeight:'500', 
+                            lineHeight:'12px' }}>
                     <span>{minutes} : {seconds}</span>
                 </div>
                 </a>
@@ -45,9 +58,19 @@ function LandingPage() {
                 }
                 title={video.title} //비디오 제목
             />
+            
             <span>{video.writer.name} </span><br /> {/* 작성자 이름 */}
             <span style={{ marginLeft: '3rem' }}> {video.views}</span>  {/* 비디오 조회수*/}
-            - <span> {moment(video.createdAt).format("YYYY.mm.DD")} </span>{/* 업데이트 날짜 */}
+
+            {video.updatedAt ? (
+                <div style={{ marginLeft: "3rem" }}> 
+                    <span>최초 업로드일: {moment(video.createdAt).format("YYYY.MM.DD")}</span><br/>
+                    <span>최종 수정일: {moment(video.updatedAt).format("YYYY.MM.DD")}</span>
+                </div>
+                
+            ) : (
+                <span>{moment(video.createdAt).format("YYYY.MM.DD")}</span>
+            )}
         </Col>
 
     })
