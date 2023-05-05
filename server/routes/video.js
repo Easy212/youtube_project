@@ -166,4 +166,13 @@ router.post("/editVideo", (req, res) => {
   });
 
 
+  router.post("/updateViews", (req, res) => {
+    Video.findByIdAndUpdate(req.body.videoId, { $inc: { views: 1 } }, { new: true })
+      .exec((err, video) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).json({ success: true, views: video.views });
+      });
+  });
+
+
 module.exports = router;

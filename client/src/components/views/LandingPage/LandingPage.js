@@ -9,6 +9,18 @@ function LandingPage() {
 
     const [Videos, setVideos] = useState([]) //비디오 정보 배열에 저장
 
+
+    const viewClick = (videoId) => {
+        axios.post('/api/video/updateViews', { videoId })
+          .then(response => {
+            if (response.data.success) {
+              console.log(response.data.views)
+            } else {
+              alert('조회수 업데이트를 실패했습니다.')
+            }
+          })
+      }
+
     useEffect(() => { //몽고DB에서 DOM이 로드 되자마자 실행
         axios.get('/api/video/getVideos') //db에서 비디오정보 가져오기 = axios 라이브러리를 사용하여 비동기 GET 요청
             .then(response => {//요청에대한 응답
@@ -28,7 +40,12 @@ function LandingPage() {
 
         return <Col key={video._id} lg={6} md={8} xs={24}> {/* 창크기가 가장클때는 6, 중간일때는 8, 가장작을때는 24 사이즈 (반응형)*/}
             <div style={{ position: 'relative' }}> 
-                <a href={`/video/${video._id}`} > {/* 클릭시 상세페이지로 넘어가는 링크 */}
+                <a  href={`/video/${video._id}`} // 클릭시 상세페이지로 넘어가는 링크
+                    onClick={ //링크로 이동하여 비디오가 열리는 시점에는 이미 조회수 업데이트가 완료되어 있어서 조회수가 증가하지않음
+                        (event) => { event.preventDefault(); viewClick(video._id);  // viewClick 함수에서 조회수를 업데이트하는 axios POST 요청이 실행되고 나면
+                                     window.location.href = `/video/${video._id}`; } //이제 링크를 따라가도록 window.location.href 속성을 이용하여 페이지를 이동
+                    }
+                > 
                 <img 
                 style={{ width: '100%' }} 
                 alt="thumbnail" 
@@ -36,18 +53,18 @@ function LandingPage() {
                 <div 
                     className=" duration" //러닝타임
                     style={{ bottom: 0, 
-                            right:0, 
-                            position: 'absolute', 
-                            margin: '4px', 
-                            color: '#fff', 
-                            backgroundColor: 'rgba(17, 17, 17, 0.8)', 
-                            opacity: 0.8, 
-                            padding: '2px 4px', 
-                            borderRadius:'2px', 
-                            letterSpacing:'0.5px', 
-                            fontSize:'12px',
-                            fontWeight:'500', 
-                            lineHeight:'12px' }}>
+                             right:0, 
+                             position: 'absolute', 
+                             margin: '4px', 
+                             color: '#fff', 
+                             backgroundColor: 'rgba(17, 17, 17, 0.8)', 
+                             opacity: 0.8, 
+                             padding: '2px 4px', 
+                             borderRadius:'2px', 
+                             letterSpacing:'0.5px', 
+                             fontSize:'12px',
+                             fontWeight:'500', 
+                             lineHeight:'12px' }}>
                     <span>{minutes} : {seconds}</span>
                 </div>
                 </a>
@@ -60,7 +77,7 @@ function LandingPage() {
             />
             
             <span>{video.writer.name} </span><br /> {/* 작성자 이름 */}
-            <span style={{ marginLeft: '3rem' }}> {video.views}</span>  {/* 비디오 조회수*/}
+            <span style={{ marginLeft: '3rem' }}> 조회수: {video.views}</span>  {/* 비디오 조회수*/}
 
             {video.updatedAt ? (
                 <div style={{ marginLeft: "3rem" }}> 
@@ -69,7 +86,7 @@ function LandingPage() {
                 </div>
                 
             ) : (
-                <span>{moment(video.createdAt).format("YYYY.MM.DD")}</span>
+                <span> 최초 업로드일: {moment(video.createdAt).format("YYYY.MM.DD")}</span>
             )}
         </Col>
 
