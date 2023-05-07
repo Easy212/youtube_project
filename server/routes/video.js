@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router(); //express에서 제공하는 router
 
+
+
+
 const multer = require('multer'); // multer = 파일업로드를 위한 모듈
 var ffmpeg = require('fluent-ffmpeg'); // 오디오, 비디오 등 미디어 파일의 인코딩, 디코딩, 변환 하는 프레임워크
 const { Video } = require("../models/Video"); // mongoose 모듈에서 Video 모델을 가져오기

@@ -7,7 +7,7 @@ import SideVideo from './Sections/SideVideo';
 import Subscriber from './Sections/Subscriber';
 import CommentsLogin from './Sections/CommentsLogin'
 import LikeDislikes from './Sections/LikeDislikes';
-import CommentsLogout from './Sections/ComentsLogout';
+
 
 
 function DetailVideoPage(props) {
