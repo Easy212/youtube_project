@@ -168,7 +168,7 @@ router.post("/editVideo", (req, res) => {
       });
   });
 
-
+  //조회수 증가
   router.post("/updateViews", (req, res) => {
     Video.findByIdAndUpdate(req.body.videoId, { $inc: { views: 1 } }, { new: true })
       .exec((err, video) => {

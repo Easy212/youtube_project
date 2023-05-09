@@ -6,9 +6,7 @@ const { Title } = Typography;
 const { Meta } = Card;
 function LandingPage() {
 
-    const [Videos, setVideos] = useState([]) //비디오 정보 배열에 저장
-
-
+    const [Videos, setVideos] = useState([]) //비디오 정보 배열에 저
     const viewClick = (videoId) => {
         axios.post('/api/video/updateViews', { videoId })
           .then(response => {
